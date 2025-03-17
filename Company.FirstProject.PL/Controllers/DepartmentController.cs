@@ -50,21 +50,23 @@ namespace Company.FirstProject.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id)
+
+        // Refactore Code 
+        public IActionResult Details(int? id ,string ViewName="Details")
         {
             if (id is null) return BadRequest("Invalid Id "); //400
             var department = _departmentRepository.Get(id.Value);
             if (department is null) return NotFound(new { statscode = 400, message = $"Departmen With ID :{id} is not found" });
-            return View(department);
+            return View( ViewName,department);
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if (id is null) return BadRequest("Invalid Id "); //400
-            var department = _departmentRepository.Get(id.Value);
-            if (department is null) return NotFound(new { statscode = 400, message = $"Departmen With ID :{id} is not found" });
-            return View(department);
+            //if (id is null) return BadRequest("Invalid Id "); //400
+            //var department = _departmentRepository.Get(id.Value);
+            //if (department is null) return NotFound(new { statscode = 400, message = $"Departmen With ID :{id} is not found" });
+            return Details(id , "Edit");
         }
 
         [HttpPost]
