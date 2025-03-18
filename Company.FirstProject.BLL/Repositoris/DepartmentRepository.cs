@@ -9,39 +9,10 @@ using System.Threading.Tasks;
 
 namespace Company.FirstProject.BLL.Repositoris
 {
-    public class IDepartmentRepository : Interfaces.IDepartmentRepository
+    public class DepartmentRepository : GenericRepository<Department>, IDepartmentRepository
     {
-        private readonly CompanyDbContext _contex;
-
-
-        // ASK CLR Create Object From CompanyDbContext
-        public IDepartmentRepository(CompanyDbContext context)
+        public DepartmentRepository(CompanyDbContext context) : base(context)
         {
-            _contex = context;
-        }
-        public IEnumerable<Department> GetAll()
-        {
-            return _contex.Departments.ToList();
-        }
-        public Department? Get(int id)
-        {
-            return _contex.Departments.Find(id);
-        }
-
-        public int Add(Department model)
-        {
-            _contex.Departments.Add(model);
-            return _contex.SaveChanges();
-        }
-        public int Update(Department model)
-        {
-            _contex.Departments.Update(model);
-            return _contex.SaveChanges();
-        }
-        public int Delete(Department model)
-        {
-            _contex.Departments.Remove(model);
-            return _contex.SaveChanges();
         }
     }
 }
