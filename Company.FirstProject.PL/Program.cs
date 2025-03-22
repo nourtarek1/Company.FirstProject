@@ -1,3 +1,4 @@
+using Company.FirstProject.BLL.Interfaces;
 using Company.FirstProject.BLL.Repositoris;
 using Company.FirstProject.DAL.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,8 @@ namespace Company.FirstProject.PL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews(); // Register Built-in MVC Service
-            builder.Services.AddScoped<IDepartmentRepository , IDepartmentRepository>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddDbContext<CompanyDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
