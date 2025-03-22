@@ -1,4 +1,5 @@
-﻿using Company.FirstProject.BLL.Repositoris;
+﻿using Company.FirstProject.BLL.Interfaces;
+using Company.FirstProject.BLL.Repositoris;
 using Company.FirstProject.DAL.Models;
 using Company.FirstProject.PL.DTOS;
 using Microsoft.AspNetCore.Mvc;

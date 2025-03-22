@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Company.FirstProject.BLL.Interfaces
 {
-    public interface IDepartmentRepository :IGenericRepository<Department>
+    public interface IDepartmentRepository : IGenericRepository<Department>
     {
         //IEnumerable<Department> GetAll();
 

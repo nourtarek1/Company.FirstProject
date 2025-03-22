@@ -13,6 +13,7 @@ namespace Company.FirstProject.BLL.Repositoris
     {
         public DepartmentRepository(CompanyDbContext context) : base(context)
         {
+
         }
     }
 }
