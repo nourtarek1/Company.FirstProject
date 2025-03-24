@@ -1,31 +1,7 @@
 ﻿@model IEnumerable<Employee>
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>AllEmployee</h1>
-
-<br />
-<br />
-@if (!string.IsNullOrEmpty(TempData.Peek("Message") as string))
+@if (Model != null && Model.Any())
 {
-    <div class="m-3 alert alert-info">
-        <p>@TempData["Message"]</p>
-    </div>
-}
-
-
-<a asp-action="Create" asp-controller="Employee" class="btn btn-primary">Create Employee</a>
-
-<br />
-<br />
-
-@if (Model.Count() > 0)
-{
-    <input type="text" id="SearchInput" placeholder="Search by Name or Phone" class="form-control" />
-
-<div id="searchResults">
-        <table class="table table-bordered">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Name</th>
@@ -44,7 +20,7 @@
                 <th>Delete</th>
             </tr>
         </thead>
-            <tbody id="employeeTableBody">
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
@@ -56,9 +32,12 @@
                     <td>@item.Salary</td>
                     <td>@item.IsActive</td>
                     <td>@item.IsDeleted</td>
-                    @if(item.Department is null){
+                    @if (item.Department is null)
+                    {
                         <td>No Department</td>
-                    }else {
+                    }
+                    else
+                    {
                         <td>@item.Department.Name</td>
                     }
                     <td>@item.HiringDate</td>
@@ -80,38 +59,8 @@
             }
         </tbody>
     </table>
-    </div>
-
 }
 else
 {
-    <div class="mt-4 alert alert-info">
-        There Are No Department :(
-    </div>
+    <p class="text-danger">No employees found.</p>
 }
-
-<script>
-    document.getElementById("SearchInput").addEventListener("keyup", function() {
-        let searchValue = this.value;
-
-        let xhr = new XMLHttpRequest();
-        let url = `/Employee/Index?SearchInput=${encodeURIComponent(searchValue)}`;
-
-        xhr.open("GET", url, true);
-        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // Mark as AJAX request
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let parser = new DOMParser();
-                let doc = parser.parseFromString(xhr.responseText, "text/html");
-                let newTableBody = doc.querySelector("#employeeTableBody");
-
-                if (newTableBody) {
-                    document.getElementById("employeeTableBody").innerHTML = newTableBody.innerHTML;
-                }
-            }
-        };
-
-        xhr.send();
-    });
-</script>
