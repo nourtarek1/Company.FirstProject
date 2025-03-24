@@ -9,11 +9,7 @@ namespace Company.FirstProject.BLL.Interfaces
 {
     public interface IEmployeeRepository : IGenericRepository<Employee>
     {
-        //IEnumerable<Employee> GetAll();
+        List<Employee> GetByNameOrPhone(string searchTerm);
 
-        //Employee? Get(int id);
-        //int Add(Employee model);
-        //int Update(Employee model);
-        //int Delete(Employee model);
     }
 }

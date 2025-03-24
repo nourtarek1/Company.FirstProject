@@ -5,6 +5,7 @@ namespace Company.FirstProject.PL.DTOS
 {
     public class CreateEmployeeDtos
     {
+
         [Required(ErrorMessage = "Name is Required !")]
         public string Name { get; set; }
 
@@ -31,5 +32,7 @@ namespace Company.FirstProject.PL.DTOS
 
         [DisplayName("Date Of Create")]
         public DateTime CreateAt { get; set; }
+
+        public int? DepartmentId { get; set; }
     }
 }

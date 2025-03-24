@@ -1,6 +1,7 @@
 using Company.FirstProject.BLL.Interfaces;
 using Company.FirstProject.BLL.Repositoris;
 using Company.FirstProject.DAL.Data.Context;
+using Company.FirstProject.PL.Mapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -20,7 +21,7 @@ namespace Company.FirstProject.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-
+            builder.Services.AddAutoMapper(M => M.AddProfile(new EmployeeProfile()));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
