@@ -10,6 +10,10 @@ namespace Company.FirstProject.PL.Mapping
         {
             CreateMap<CreateEmployeeDtos, Employee>();
             CreateMap<Employee,CreateEmployeeDtos>();
+
+            CreateMap<CreateDepartmentDto, Department>();
+            CreateMap<Department, CreateDepartmentDto>();
+
         }
     }
 }

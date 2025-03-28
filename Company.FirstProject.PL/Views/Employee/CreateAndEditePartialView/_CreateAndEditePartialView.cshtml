@@ -58,13 +58,27 @@
         <span asp-validation-for="CreateAt" class="text-danger"></span>
     </div>
 </div>
-
-<div class="col-md-3">    
+<div class="col-md-3">
+    <div class="form-floating">
+        <select asp-for="DepartmentId" asp-items="Departments" class="form-control">
+            <option value="@null">-- Select Department --</option>
+        </select>
         <label asp-for="DepartmentId" class="col-form-label"></label>
-    <select asp-for="DepartmentId" asp-items="Departments" class="form-control">
-        <option value="@null">-- Select Departmen -- </option>
-    </select>
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+    </div>
 </div>
+
+<div class="col-md-3">
+    <div class="form-floating">
+        <input  asp-for="Image" class="form-control" accept="image/*" />
+        <label asp-for="Image" class="col-form-label"></label>
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+</div>
+
+
+
+
 
 <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" asp-for="IsActive">

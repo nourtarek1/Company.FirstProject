@@ -9,7 +9,7 @@ namespace Company.FirstProject.BLL.Interfaces
 {
     public interface IEmployeeRepository : IGenericRepository<Employee>
     {
-        List<Employee> GetByNameOrPhone(string searchTerm);
+        Task<List<Employee>> GetByNameOrPhoneAsync(string searchTerm);
 
     }
 }

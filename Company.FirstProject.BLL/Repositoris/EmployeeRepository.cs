@@ -19,15 +19,15 @@ namespace Company.FirstProject.BLL.Repositoris
             _context = context;
         }
 
-        public List<Employee> GetByNameOrPhone(string searchTerm)
+        public async Task<List<Employee>> GetByNameOrPhoneAsync(string searchTerm)
         {
             //return _context.Employees.Include(E => E.Department).Where(E => E.Name.Contains(name.ToLower())).ToList();
             searchTerm = searchTerm.Trim().ToLower(); // Remove spaces & make it case insensitive
-            return _context.Employees
+            return await _context.Employees
                 .Include(E => E.Department)
                 .Where(E => E.Name.ToLower().Contains(searchTerm) ||
                             E.Phone.Contains(searchTerm))
-                .ToList();
+                .ToListAsync();
         }
     }
 }
