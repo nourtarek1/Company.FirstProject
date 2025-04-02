@@ -2,9 +2,12 @@ using Company.FirstProject.BLL;
 using Company.FirstProject.BLL.Interfaces;
 using Company.FirstProject.BLL.Repositoris;
 using Company.FirstProject.DAL.Data.Context;
+using Company.FirstProject.DAL.Models;
 using Company.FirstProject.PL.Mapping;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Data.Common;
 
 namespace Company.FirstProject.PL
 {
@@ -24,6 +27,11 @@ namespace Company.FirstProject.PL
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddAutoMapper(M => M.AddProfile(new EmployeeProfile()));
+            builder.Services.AddIdentity<AppUser, IdentityRole>()
+                             .AddEntityFrameworkStores<CompanyDbContext>()
+                             .AddDefaultTokenProviders();
+
+            builder.Services.ConfigureApplicationCookie(config =>config.LoginPath= "/Auth/SignIn");
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -39,8 +47,8 @@ namespace Company.FirstProject.PL
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

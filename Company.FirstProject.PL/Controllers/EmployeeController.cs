@@ -4,10 +4,13 @@ using Company.FirstProject.BLL.Repositoris;
 using Company.FirstProject.DAL.Models;
 using Company.FirstProject.PL.DTOS;
 using Company.FirstProject.PL.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.FirstProject.PL.Controllers
 {
+    [Authorize]
+
     public class EmployeeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -3,10 +3,13 @@ using Company.FirstProject.BLL.Interfaces;
 using Company.FirstProject.BLL.Repositoris;
 using Company.FirstProject.DAL.Models;
 using Company.FirstProject.PL.DTOS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.FirstProject.PL.Controllers
 {
+    [Authorize]
+
     public class DepartmentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

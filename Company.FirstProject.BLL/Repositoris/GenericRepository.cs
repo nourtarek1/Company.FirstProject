@@ -24,7 +24,7 @@ namespace Company.FirstProject.BLL.Repositoris
             {
                 return (IEnumerable<T>) await _context.Employees.Include(E => E.Department).ToListAsync();
             }
-            return _context.Set<T>().ToList();
+            return await _context.Set<T>().ToListAsync();
         }
         public async Task<T?> GetAsync(int id)
         {
