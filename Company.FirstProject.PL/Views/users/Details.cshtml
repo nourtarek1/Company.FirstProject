@@ -1,0 +1,47 @@
+﻿@model UsersDtos
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details Page</h1>
+
+<br />
+<br />
+
+<form asp-action="Edit">
+    <div class="row g-3">
+
+        <div class="col-md-3">
+            <div class="form-floating">
+                <input readonly asp-for="UserName" class="form-control" />
+                <label asp-for="UserName" class="col-form-label"></label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating">
+                <input readonly asp-for="FirstName" class="form-control" />
+                <label asp-for="FirstName" class="col-form-label"></label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating">
+                <input readonly asp-for="LastName" class="form-control" />
+                <label asp-for="LastName" class="col-form-label"></label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating">
+                <input readonly asp-for="Email" class="form-control" />
+                <label asp-for="Email" class="col-form-label"></label>
+            </div>
+        </div>
+        <div class="my-3">
+
+            <a asp-action="Edit" asp-route-id="@Model.Id" asp-controller="users" class="btn btn-warning">Edit</a>
+            <a asp-controller="users" asp-action="Index" class="btn btn-light">Back To List</a>
+        </div>
+
+    </div>
+
+</form>
+

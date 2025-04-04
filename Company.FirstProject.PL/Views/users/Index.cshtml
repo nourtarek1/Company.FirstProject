@@ -1,0 +1,115 @@
+﻿@model IEnumerable<UsersDtos>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Users</h1>
+
+
+
+<br />
+<br />
+
+
+@* <form> *@
+@*     <div class="row m-4"> *@
+@*         <div class="col-6"> *@
+@*             <input type="text" id="SearchInput" name="SearchInput" class="form-control" /> *@
+@*         </div> *@
+@*         <div class="col-6"> *@
+@*             <input type="submit" value="Serarch" class="btn btn-success" /> *@
+@*         </div> *@
+
+@* </div> *@
+
+@* </form> *@
+
+<br />
+<br />
+@if (Model.Count() > 0)
+{
+    <input type="text" id="SearchInput" placeholder="Search by Name or Phone" class="form-control" />
+
+<div id="searchResults">
+
+        <table class=" table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User-Name</th>
+                 <th>First-Name</th>
+                <th>Last-Name</th>
+                <th>Email</th>
+                <th>Roles</th>             
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+            <tbody id="employeeTableBody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                     
+                     <td>@item.Id</td>
+                    <td>@item.UserName</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@foreach(var role in item.Roles){
+                    
+                    <span>@role</span>
+                    }
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Details</a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Update</a>
+                    </td>
+                    <td>
+                        <form asp-action="Delete" method="post" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+}
+else
+{
+    <div class="mt-4 alert alert-info">
+        There Are No Department :(
+    </div>
+}
+
+
+<script>
+    document.getElementById("SearchInput").addEventListener("keyup", function() {
+        let searchValue = this.value;
+
+        let xhr = new XMLHttpRequest();
+        let url = `/Users/Index?SearchInput=${encodeURIComponent(searchValue)}`;
+
+        xhr.open("GET", url, true);
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // Mark as AJAX request
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(xhr.responseText, "text/html");
+                let newTableBody = doc.querySelector("#employeeTableBody");
+
+                if (newTableBody) {
+                    document.getElementById("employeeTableBody").innerHTML = newTableBody.innerHTML;
+                }
+            }
+        };
+
+        xhr.send();
+    });
+</script>
